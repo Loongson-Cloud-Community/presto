@@ -70,11 +70,14 @@ final class PrestoSystemRequirements
         String osName = StandardSystemProperty.OS_NAME.value();
         String osArch = StandardSystemProperty.OS_ARCH.value();
         if ("Linux".equals(osName)) {
-            if (!"amd64".equals(osArch) && !"ppc64le".equals(osArch)) {
+            if (!"amd64".equals(osArch) && !"ppc64le".equals(osArch) && !"loongarch64".equals(osArch)) {
                 failRequirement("Presto requires amd64 or ppc64le on Linux (found %s)", osArch);
             }
             if ("ppc64le".equals(osArch)) {
                 warnRequirement("Support for the POWER architecture is experimental");
+            }
+            if ("loongarch64".equals(osArch)) {
+                warnRequirement("Support for the LOONG architecture is experimental");
             }
         }
         else if ("Mac OS X".equals(osName)) {
